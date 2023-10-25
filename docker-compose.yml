@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mysql:
+    image: mysql
+    container_name: mysql-container
+    ports:
+      - "13306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: comic_db
+
+  phpmyadmin:
+    depends_on: 
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    ports:
+      - "8080:80"
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
